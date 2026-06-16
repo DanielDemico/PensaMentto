@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import FindAll from "../components/findAll/page"
 
 export default function Home() {
 
@@ -25,21 +26,23 @@ export default function Home() {
       })
 
     });
-
-    alert("Diário salvo!");
-
   }
 
   return (
-    <div className="">
+    <div className="box">
       <textarea
         value={text}
         onChange={(e) => setText(e.target.value)}
+        className="input-text"
+        placeholder="Digite aqui ...."
       />
 
       <button onClick={handleSubmit}>
         Salvar
       </button>
+      
+      <FindAll />
     </div>
+
   );
 }

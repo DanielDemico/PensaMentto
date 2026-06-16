@@ -1,24 +1,52 @@
 import { connectDB } from "@/lib/mongodb";
 import { JournalType } from "@/models/Journal";
-import { saveJournal } from "@/services/journal.service";
+import {
+    saveJournal,
+    listJournals
+} from "@/services/journal.service";
 
-export async function POST(req: Request) {
+// GET - Listar todos os diários com paginação
+export async function GET(req: Request) {
+    try {
+        await connectDB();
 
-    console.log("API chamada");
-    await connectDB();
+        const url = new URL(req.url);
+        const limit = parseInt(url.searchParams.get("limit") || "10");
+        const skip = parseInt(url.searchParams.get("skip") || "0");
 
-    const body = await req.json() as JournalType; // await porque devolve uma Promise
-
-    //validar se existe texto
-    if (!body.text?.trim()) {
+        const result = await listJournals(limit, skip);
+        return Response.json(result);
+    } catch (error) {
         return Response.json(
-            { error: "Texto obrigatório" },
-            { status: 400 }
+            { error: "Erro ao listar diários" },
+            { status: 500 }
         );
     }
+}
 
+// POST - Criar novo diário
+export async function POST(req: Request) {
+    try {
+        await connectDB();
 
-    const result = await saveJournal(body); // await porque é async
+        // await porque devolve uma Promise
+        const body = await req.json() as JournalType;
 
-    return Response.json(result);
+        //validar se existe texto
+        if (!body.text?.trim()) {
+            return Response.json(
+                { error: "Texto obrigatório" },
+                { status: 400 }
+            );
+        }
+
+        // await porque é async
+        const result = await saveJournal(body);
+        return Response.json(result);
+    } catch (error) {
+        return Response.json(
+            { error: "Erro ao salvar diário" },
+            { status: 500 },
+        );
+    }
 }

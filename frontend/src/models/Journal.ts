@@ -27,6 +27,8 @@ const JournalSchema = new mongoose.Schema(
 
 );
 
-export type JournalType = InferSchemaType<typeof JournalSchema>;
+export type JournalType = InferSchemaType<typeof JournalSchema> & {
+  _id: mongoose.Types.ObjectId;
+};;
 
 export default mongoose.models.Journal || mongoose.model("Journal", JournalSchema);

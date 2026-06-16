@@ -76,13 +76,16 @@ export async function DELETE(
         await connectDB();
 
         const result = await removeJournal(params.id);
+        
+        await console.log("parans" + params.id);
+        console.log("result" + result);
 
-        if (!result) {
-            return Response.json(
-                { error: "Diário não encontrado" },
-                { status: 404 }
-            );
-        }
+        // if (!result) {
+        //     return Response.json(
+        //         { error: "Diário não encontrado" },
+        //         { status: 404 }
+        //     );
+        // }
 
         return Response.json({ message: "Diário deletado com sucesso" });
     } catch (error) {

@@ -22,9 +22,8 @@ export default function Home() {
       },
       body: JSON.stringify({
           text: text,
-          tags: ["diario"]
+          tags: []
       })
-
     });
   }
 

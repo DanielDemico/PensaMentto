@@ -4,6 +4,9 @@ services:
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: example
+      MONGO_INITDB_DATABASE: diario
+    ports:
+      - 27017:27017
 
   mongo-express:
     image: mongo-express
@@ -14,3 +17,17 @@ services:
       ME_CONFIG_BASICAUTH_ENABLED: true
       ME_CONFIG_BASICAUTH_USERNAME: mongoexpressuser
       ME_CONFIG_BASICAUTH_PASSWORD: mongoexpresspass
+
+  frontend:
+    image: node:20-alpine
+    working_dir: /app
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    ports:
+      - 3000:3000
+    environment:
+      - NODE_ENV=development
+    command: sh -c "npm install && npm run dev -- --hostname 0.0.0.0"
+    depends_on:
+      - mongo

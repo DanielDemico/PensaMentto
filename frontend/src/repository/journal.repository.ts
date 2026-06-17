@@ -26,3 +26,15 @@ export async function deleteJournal(id: string) {
     console.log(id);
     return Journal.findByIdAndDelete(new Types.ObjectId(id));
 }
+
+export async function searchJournalsByText(query: string, limit = 10, skip = 0) {
+    return Journal.find({
+        text: {
+            $regex: query,
+            $options: "i" // case-insensitive
+        }
+    })
+    .limit(limit)
+    .skip(skip)
+    .sort({ createdAt: -1 });
+}

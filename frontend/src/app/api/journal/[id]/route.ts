@@ -1,5 +1,4 @@
 import { connectDB } from "@/lib/mongodb";
-import { JournalType } from "@/models/Journal";
 import {
     getJournal,
     editJournal,
@@ -7,30 +6,30 @@ import {
 } from "@/services/journal.service";
 
 // GET - Buscar diário por ID
-export async function GET(
-    req: Request,
-    { params }: { params: { id: string } }
-) {
-    try {
-        await connectDB();
+// export async function GET(
+//     req: Request,
+//     { params }: { params: { id: string } }
+// ) {
+//     try {
+//         await connectDB();
 
-        const result = await getJournal(params.id);
+//         const result = await getJournal(params.id);
 
-        if (!result) {
-            return Response.json(
-                { error: "Diário não encontrado" },
-                { status: 404 }
-            );
-        }
+//         if (!result) {
+//             return Response.json(
+//                 { error: "Diário não encontrado" },
+//                 { status: 404 }
+//             );
+//         }
 
-        return Response.json(result);
-    } catch (error) {
-        return Response.json(
-            { error: error },
-            { status: 500 }
-        );
-    }
-}
+//         return Response.json(result);
+//     } catch (error) {
+//         return Response.json(
+//             { error: error },
+//             { status: 500 }
+//         );
+//     }
+// }
 
 // PUT - Atualizar diário
 export async function PUT(
@@ -41,8 +40,6 @@ export async function PUT(
         await connectDB();
         
         const { id } = await context.params;
-
-        console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
 
         const body = await req.json() as Partial<{
             newText: string;

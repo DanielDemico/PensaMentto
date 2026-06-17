@@ -10,7 +10,6 @@ import { z } from "zod";
 import Groq from "groq-sdk";
 
 async function makeAnalisys(text:string){
-
     const groq = new Groq({
         apiKey:process.env.GROQ_API_KEY
     });

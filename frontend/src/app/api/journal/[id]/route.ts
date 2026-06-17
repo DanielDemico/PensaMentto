@@ -70,14 +70,16 @@ export async function PUT(
 // DELETE - Deletar diário
 export async function DELETE(
     req: Request,
-    { params }: { params: { id: string } }
+    context: { params: Promise<{ id: string }> }
 ) {
     try {
         await connectDB();
 
-        const result = await removeJournal(params.id);
+        const { id } = await context.params;
+
+        const result = await removeJournal(id);
         
-        await console.log("parans" + params.id);
+        await console.log("parans" + id);
         console.log("result" + result);
 
         // if (!result) {

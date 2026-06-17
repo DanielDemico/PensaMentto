@@ -71,11 +71,11 @@ export default function FindAll() {
           key={register._id!}
           className="register"
           >
-          <p>{register._id.toString()}</p>
-          <p>{register.userId}</p>
-          <p>{register.text}</p>
-          <p>{register.createdAt?.toString()}</p>
-          <p>{register.updatedAt?.toString()}</p>
+          <p>ObjectId: {register._id.toString()}</p>
+          <p>Passagem: {register.text}</p>
+          <p>Criado em: {register.createdAt?.toString()}</p>
+          <p>Editado em: {register.updatedAt?.toString()}</p>
+          <span>Tags: </span>
           {register.tags?.map((tag) => (
             <span key={tag}>{tag}, </span>
           ))}

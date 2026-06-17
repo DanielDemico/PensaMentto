@@ -1,10 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import FindAll from "@/app/findAll/page";
-import FindByText from "@/app/findByText/page";
 
-export default function JournalPage() {
+export default function FindByText() {
   const [text, setText] = useState("");
 
   async function handleSubmit() {
@@ -28,27 +26,22 @@ export default function JournalPage() {
   }
 
   return (
-    <main className="journal-page">
+    <div className="journal-page">
       <section className="journal-box">
-        <h1>Escreva no seu diário</h1>
+        <h1>Procure por texto</h1>
         <textarea
           value={text}
           onChange={(e) => setText(e.target.value)}
           className="input-text"
           placeholder="Digite aqui..."
         />
-        <button onClick={handleSubmit}>Salvar</button>
-      </section>
-
-      <section>
-        <FindByText />
+        <button onClick={handleSubmit}>Procurar</button>
       </section>
 
       <hr></hr>
 
       <section className="journal-list-section">
-        <FindAll />
       </section>
-    </main>
+    </div>
   );
 }

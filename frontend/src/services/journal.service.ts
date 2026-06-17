@@ -69,8 +69,6 @@ export async function getJournal(id: string) {
     return getJournalById(id);
 }
 
-
-
 export async function listJournals(limit: number = 10, skip: number = 0) {
     return getAllJournals(limit, skip);
 }

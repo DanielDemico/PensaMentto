@@ -9,4 +9,8 @@ export async function connectDB() {
   }
 
   await mongoose.connect(MONGODB_URI);
+
+  // Criar collection explicitamente
+  const db = mongoose.connection;
+  await db.collection("journal").createIndex({ createdAt: -1 });
 }

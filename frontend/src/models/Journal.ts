@@ -13,7 +13,12 @@ const JournalSchema = new mongoose.Schema(
             {
                 type: String,
             }
-        ]
+        ],
+        analise: {
+            sentimento: { type: String },
+            pontuation: {type: Number},
+            key_words: [{type: String}]
+        }
     },
 
     {

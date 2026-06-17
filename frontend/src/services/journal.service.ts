@@ -50,17 +50,6 @@ function cleanTags(tags?: string[]) {
 }
 
 export async function saveJournal(journal: JournalType) {
-    return createJournal({
-        ...journal,
-        tags: cleanTags(journal.tags)
-    });
-}
-
-export async function getJournal(id: string) {
-    console.log(id)
-    return getJournalById(id);
-}
-
     const analise = await makeAnalisys(journal.text);
 
     console.log("Análise recebida:", analise);  
@@ -74,6 +63,14 @@ export async function getJournal(id: string) {
             key_words: analise.palavras_chave
         }
     });
+}
+
+export async function getJournal(id: string) {
+    console.log(id)
+    return getJournalById(id);
+}
+
+
 
 export async function listJournals(limit: number = 10, skip: number = 0) {
     return getAllJournals(limit, skip);

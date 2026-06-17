@@ -6,6 +6,7 @@ export async function createJournal(data: JournalType) {
 }
 
 export async function getJournalById(id: string) {
+    console.log(id)
     return Journal.findById(new Types.ObjectId(id));
 }
 
@@ -22,5 +23,6 @@ export async function updateJournal(id: string, data: Partial<JournalType>) {
 }
 
 export async function deleteJournal(id: string) {
+    console.log(id);
     return Journal.findByIdAndDelete(new Types.ObjectId(id));
 }

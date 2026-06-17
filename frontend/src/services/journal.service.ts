@@ -57,6 +57,7 @@ export async function saveJournal(journal: JournalType) {
 }
 
 export async function getJournal(id: string) {
+    console.log(id)
     return getJournalById(id);
 }
 
@@ -94,5 +95,6 @@ export async function editJournal(id: string, journal: Partial<JournalType>) {
 }
 
 export async function removeJournal(id: string) {
+    console.log(id);
     return deleteJournal(id);
 }

@@ -46,10 +46,10 @@ const DailyEmotionsChart = ({ records }: Props) => {
   }, [records]);
 
   return (
-    <div className="bg-white/80 backdrop-blur-md border border-gray-100 rounded-2xl shadow-sm p-6 w-full h-full flex flex-col">
+    <div className="journal-card w-full h-full flex flex-col">
       <div className="mb-4">
-        <h2 className="text-xl font-bold text-gray-800">Variação de Humor</h2>
-        <p className="text-sm text-gray-500">Média diária da sua pontuação de sentimento</p>
+        <h2 className="text-xl font-bold text-[#4f4574]">Variação de Humor</h2>
+        <p className="text-sm text-[#4f4574] opacity-80">Média diária da sua pontuação de sentimento</p>
       </div>
 
       <div className="flex-1 min-h-[300px] w-full">
@@ -61,8 +61,8 @@ const DailyEmotionsChart = ({ records }: Props) => {
             >
               <defs>
                 <linearGradient id="colorPontuacao" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="5%" stopColor="#3b82f6" stopOpacity={0.4}/>
-                  <stop offset="95%" stopColor="#3b82f6" stopOpacity={0}/>
+                  <stop offset="5%" stopColor="#7a69b8" stopOpacity={0.4}/>
+                  <stop offset="95%" stopColor="#7a69b8" stopOpacity={0}/>
                 </linearGradient>
               </defs>
               <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f0f0f0" />
@@ -70,24 +70,24 @@ const DailyEmotionsChart = ({ records }: Props) => {
                 dataKey="date" 
                 axisLine={false} 
                 tickLine={false} 
-                tick={{ fill: '#6b7280', fontSize: 12 }} 
+                tick={{ fill: '#4f4574', fontSize: 12, opacity: 0.8 }} 
                 dy={10}
               />
               <YAxis 
                 axisLine={false} 
                 tickLine={false} 
-                tick={{ fill: '#6b7280', fontSize: 12 }} 
+                tick={{ fill: '#4f4574', fontSize: 12, opacity: 0.8 }} 
                 domain={[0, 100]}
               />
               <Tooltip 
                 contentStyle={{ borderRadius: '12px', border: 'none', boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)' }}
-                labelStyle={{ fontWeight: 'bold', color: '#374151', marginBottom: '4px' }}
-                itemStyle={{ color: '#3b82f6' }}
+                labelStyle={{ fontWeight: 'bold', color: '#4f4574', marginBottom: '4px' }}
+                itemStyle={{ color: '#7a69b8' }}
               />
               <Area 
                 type="monotone" 
                 dataKey="pontuacao" 
-                stroke="#3b82f6" 
+                stroke="#7a69b8" 
                 strokeWidth={3}
                 fillOpacity={1} 
                 fill="url(#colorPontuacao)" 

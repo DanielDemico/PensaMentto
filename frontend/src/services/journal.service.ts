@@ -54,7 +54,7 @@ export async function saveJournal(journal: JournalType) {
 
     console.log("Análise recebida:", analise);  
 
-    return createJournal({
+    const createdJournal = await createJournal({
         ...journal, 
         tags:analise.tags,
         analise: {
@@ -63,6 +63,15 @@ export async function saveJournal(journal: JournalType) {
             key_words: analise.palavras_chave
         }
     });
+
+    try {
+        const { updateStreak } = await import('@/services/streak.service');
+        await updateStreak(new Date());
+    } catch (err) {
+        console.error("Erro ao atualizar ofensiva:", err);
+    }
+
+    return createdJournal;
 }
 
 export async function getJournal(id: string) {

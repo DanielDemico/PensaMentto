@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 import DailyEmotionsChart from '@/app/components/DailyEmotionsChart';
 import DailyStreakCard from '@/app/components/DailyStreakCard';
 import EmotionsTimelineKeywordsCloud from '@/app/components/EmotionsTimelineKeywordsCloud';
@@ -9,6 +10,7 @@ import { EmotionRecord } from '@/types/emotion';
 export default function DashboardPage() {
   const [records, setRecords] = useState<EmotionRecord[]>([]);
   const [loading, setLoading] = useState(true);
+  const router = useRouter();
 
   useEffect(() => {
     async function fetchDashboard() {
@@ -43,18 +45,26 @@ export default function DashboardPage() {
 
   if (loading) {
     return (
-      <main className="p-8 min-h-screen bg-gray-50/50 flex items-center justify-center">
-        <p className="text-gray-500 text-lg">Carregando dashboard...</p>
+      <main className="journal-page" style={{ height: '100vh', justifyContent: 'center', alignItems: 'center' }}>
+        <p className="text-[#4f4574] text-lg font-medium">Carregando dashboard...</p>
       </main>
     );
   }
 
   return (
-    <main className="p-8 min-h-screen bg-gray-50/50">
-      <div className="max-w-7xl mx-auto space-y-8">
-        <header>
-          <h1 className="text-3xl font-extrabold text-gray-900 tracking-tight">Dashboard de Emoções</h1>
-          <p className="mt-2 text-gray-500 text-lg">Acompanhe seu humor, ofensiva de registros e principais tópicos.</p>
+    <main className="journal-page" style={{ height: 'auto', minHeight: '100vh', flexDirection: 'column', overflow: 'auto', gap: '1rem' }}>
+      <div className="max-w-7xl mx-auto space-y-8 w-full">
+        <header className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+          <div>
+            <h1 className="journal-title" style={{ textAlign: 'left' }}>Dashboard de Emoções</h1>
+            <p className="mt-2 text-[#4f4574] opacity-80 text-lg">Acompanhe seu humor, ofensiva de registros e principais tópicos.</p>
+          </div>
+          <button 
+            className="cta-button"
+            onClick={() => router.push('/journal')}
+          >
+            Tela inicial
+          </button>
         </header>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-stretch">
@@ -62,7 +72,7 @@ export default function DashboardPage() {
             <DailyEmotionsChart records={records} />
           </div>
           <div className="lg:col-span-1 min-h-[350px]">
-            <DailyStreakCard records={records} />
+            <DailyStreakCard />
           </div>
         </div>
 

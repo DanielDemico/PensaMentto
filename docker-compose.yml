@@ -26,8 +26,8 @@ services:
       - /app/node_modules
     ports:
       - 3000:3000
-    environment:
-      - NODE_ENV=development
+    env_file:
+      - .env
     command: sh -c "npm install --legacy-peer-deps && npx tsx mongo_seeds.ts && npm run dev -- --hostname 0.0.0.0"
     depends_on:
       - mongo

@@ -1,27 +1,54 @@
+"use client";
+
+import { useEffect, useState } from 'react';
 import DailyEmotionsChart from '@/app/components/DailyEmotionsChart';
 import DailyStreakCard from '@/app/components/DailyStreakCard';
 import EmotionsTimelineKeywordsCloud from '@/app/components/EmotionsTimelineKeywordsCloud';
 import { EmotionRecord } from '@/types/emotion';
-import Journal from '@/models/Journal';
-import { connectDB } from '@/lib/mongodb';
 
-export default async function DashboardPage() {
-  await connectDB();
-  const journals = await Journal.find().sort({ createdAt: -1 }).lean();
-  
-  const records: EmotionRecord[] = journals.map((j: any) => ({
-    analise: {
-      sentimento: j.analise?.sentimento || "NEUTRO",
-      pontuation: j.analise?.pontuation || 50,
-      key_words: j.analise?.key_words || [],
-    },
-    key_words: j.analise?.key_words || [],
-    pontuation: j.analise?.pontuation || 50,
-    sentimento: j.analise?.sentimento || "NEUTRO",
-    createdAt: j.createdAt ? j.createdAt.toISOString() : new Date().toISOString(),
-    tags: j.tags || [],
-    text: j.text || ""
-  }));
+export default function DashboardPage() {
+  const [records, setRecords] = useState<EmotionRecord[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function fetchDashboard() {
+      try {
+        const res = await fetch('/api/dashboard');
+        if (!res.ok) throw new Error("Erro ao buscar dashboard");
+        const data = await res.json();
+        
+        const mappedRecords: EmotionRecord[] = data.map((j: any) => ({
+          analise: {
+            sentimento: j.analise?.sentimento || "NEUTRO",
+            pontuation: j.analise?.pontuation || 50,
+            key_words: j.analise?.key_words || [],
+          },
+          key_words: j.analise?.key_words || [],
+          pontuation: j.analise?.pontuation || 50,
+          sentimento: j.analise?.sentimento || "NEUTRO",
+          createdAt: j.createdAt ? j.createdAt : new Date().toISOString(),
+          tags: j.tags || [],
+          text: j.text || ""
+        }));
+
+        setRecords(mappedRecords);
+      } catch (e) {
+        console.error(e);
+      } finally {
+        setLoading(false);
+      }
+    }
+    fetchDashboard();
+  }, []);
+
+  if (loading) {
+    return (
+      <main className="p-8 min-h-screen bg-gray-50/50 flex items-center justify-center">
+        <p className="text-gray-500 text-lg">Carregando dashboard...</p>
+      </main>
+    );
+  }
+
   return (
     <main className="p-8 min-h-screen bg-gray-50/50">
       <div className="max-w-7xl mx-auto space-y-8">

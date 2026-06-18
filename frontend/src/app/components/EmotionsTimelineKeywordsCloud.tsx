@@ -40,9 +40,9 @@ export default function EmotionsTimelineKeywordsCloud({ records = [] }: Props) {
 
     // format for react-d3-cloud requires { text: string, value: number }
     return entries
-      .map(([text, count]) => ({ text, value: count * 10 })) // scaled up base value
+      .map(([text, count]) => ({ text, value: count }))
       .sort((a, b) => b.value - a.value)
-      .slice(0, 10);
+      .slice(0, 30);
   }, [records, period]);
 
   return (
@@ -73,7 +73,7 @@ export default function EmotionsTimelineKeywordsCloud({ records = [] }: Props) {
               font="Inter, sans-serif"
               fontStyle="normal"
               fontWeight="bold"
-              fontSize={(word) => Math.max(12, Math.min(36, 10 + word.value * 2))}
+              fontSize={(word) => Math.max(14, Math.min(60, 12 + word.value * 8))}
               spiral="archimedean"
               rotate={0}
               padding={2}

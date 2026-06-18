@@ -65,7 +65,7 @@ export default function FindAll() {
 
   return (
     <div>
-      <button onClick={handleFindAll}>Buscar Diários</button>
+      <button onClick={handleFindAll} className="cta-button">Buscar Diários</button>
       {registers.map((register: JournalType) => (
         <div 
           key={register._id!}

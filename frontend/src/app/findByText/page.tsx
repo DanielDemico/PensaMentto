@@ -71,9 +71,9 @@ export default function FindByText() {
   }
 
   return (
-    <div className="journal-page">
+    <div className="journal-find-page">
       <section className="journal-box">
-        <h1>Procure por texto</h1>
+        <h1 className="journal-title">Procure por texto</h1>
 
         <textarea
           value={text}
@@ -83,6 +83,7 @@ export default function FindByText() {
         />
 
         <button 
+            className="cta-button"
             onClick={handleSubmit}
         >
            Procurar
@@ -109,6 +110,7 @@ export default function FindByText() {
 
                 <div>
                     <button
+                    className="cta-button"
                     onClick={() =>
                         handleDelete(item._id.toString())
                     }
@@ -132,6 +134,7 @@ export default function FindByText() {
                     <br></br>
 
                     <button
+                    className="cta-button"
                     onClick={() =>
                         handleUpdate(item._id.toString())
                     }

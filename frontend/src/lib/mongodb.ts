@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const MONGODB_URI = "mongodb://root:example@localhost:27017/diario?authSource=admin";
+const MONGODB_URI = "mongodb://root:example@mongo:27017/diario?authSource=admin";
 
 
 export async function connectDB() {

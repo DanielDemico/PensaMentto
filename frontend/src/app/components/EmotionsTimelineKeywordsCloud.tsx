@@ -10,7 +10,7 @@ interface Props {
   records?: EmotionRecord[];
 }
 
-const colors = ['#3b82f6', '#ec4899', '#8b5cf6', '#10b981', '#f59e0b', '#ef4444', '#06b6d4', '#6366f1'];
+const colors = ['#4f4574', '#7a69b8', '#9d8cdb', '#c5baf1', '#5e518c', '#8a7dbf', '#a99bea'];
 
 export default function EmotionsTimelineKeywordsCloud({ records = [] }: Props) {
   const [period, setPeriod] = useState<number>(7); // days
@@ -46,11 +46,11 @@ export default function EmotionsTimelineKeywordsCloud({ records = [] }: Props) {
   }, [records, period]);
 
   return (
-    <div className="bg-white/80 backdrop-blur-md border border-gray-100 rounded-2xl shadow-sm p-4 w-full h-full flex flex-col">
+    <div className="journal-card w-full h-full flex flex-col">
       <div className="flex justify-between items-center mb-3">
         <div>
-          <h2 className="text-xl font-bold text-gray-800">Nuvem de Palavras</h2>
-          <p className="text-sm text-gray-500">Principais sentimentos e tópicos no período selecionado</p>
+          <h2 className="text-xl font-bold text-[#4f4574]">Nuvem de Palavras</h2>
+          <p className="text-sm text-[#4f4574] opacity-80">Principais sentimentos e tópicos no período selecionado</p>
         </div>
 
         <select
